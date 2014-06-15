@@ -1,0 +1,96 @@
+@(metas: List[models.Meta])
+@import helper._
+
+@main("Gerenciador de Metas"){
+
+<div class="container-fluid">
+	<div class="row">
+		
+		<!--  Barra Lateral -->
+		<div class="col-md-2" role="complementary">
+			<ul class="nav nav-pills nav-stacked" style="background-color: #eee">
+				<li><a href="/">Metas</a></li>
+				<li><a href="/cadastro">Cadastrar Metas</a></li>
+				<li class="active"><a href="/editar">Editar Metas</a></li>
+			</ul>
+		</div>		
+		
+
+		<!--  Conteudo Central -->
+		<div class="col-md-10">
+			
+			<div class="panel panel-primary">
+  				<div class="panel-heading">Edição de Metas</div>
+  					<div class="panel-body">
+    					<table class="table table-striped table-condensed table-hover">
+							<thead>
+								<tr>
+									<th width="170">Data</th>
+									<th>Descrição</th>
+									<th width="100">Prioridade</th>
+									<th width="130">Status</th>
+									<th width="115">Opções</th>
+								</tr>
+							</thead>
+							@if(!metas.isEmpty){
+								<tbody>
+									@for(meta <- metas){
+										
+										@if(meta.isStatus()){
+
+											<tr class="success">
+												<td align="center">@meta.getDataFormatada()</td>
+												<td>@meta.getDescricao()</td>
+												<td>@meta.getPrioridadeFormatada()</td>
+												<td>CONCLUÍDA</td>
+												<td>
+													<div class="row">
+													  <div class="col-md-5">
+														  <form class="control-group" action="/editar/meta" method="post">
+															<button class='btn btn-xs btn-success' type="submit" id="@meta.getId()" name="ID" value="@meta.getId()">Editar</button>
+														</form>
+													  </div>
+													  
+													  <div class="col-md-5">
+													  	<form class="control-group" action="/remover/meta" method="post">
+															<button class='btn btn-xs btn-danger' type="submit" id="@meta.getId()" name="ID" value="@meta.getId()">Excluir</button>
+														</form>
+													  </div>
+													</div>
+												</td>
+											</tr>
+											
+											}else{
+											<tr class=warning>
+												<td align="center">@meta.getDataFormatada()</td>
+												<td>@meta.getDescricao()</td>
+												<td>@meta.getPrioridadeFormatada()</td>
+												<td>ABERTA</td>
+												<td>
+													<div class="row">
+													  <div class="col-md-5">
+														  <form class="control-group" action="/editar/meta" method="post">
+															<button class='btn btn-xs btn-success' type="submit" id="@meta.getId()" name="ID" value="@meta.getId()">Editar</button>
+														</form>
+													  </div>
+													  
+													  <div class="col-md-5">
+													  	<form class="control-group" action="/remover/meta" method="post">
+															<button class='btn btn-xs btn-danger' type="submit" id="@meta.getId()" name="ID" value="@meta.getId()">Excluir</button>
+														</form>
+													  </div>
+													</div>
+												</td>
+											</tr>
+										}
+									}
+								</tbody>
+							}
+						</table>
+  					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+}

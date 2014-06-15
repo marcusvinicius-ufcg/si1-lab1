@@ -1,0 +1,63 @@
+@(id: Long, meta: Form[models.Meta])
+@import helper._
+
+
+@main("Cadastrar Metas"){
+<div class="container-fluid">
+	<div class="row">
+		<!--  Barra Lateral -->
+
+		<div class="col-md-2" role="complementary">
+			<ul class="nav nav-pills nav-stacked painel"
+				style="background-color: #eee">
+				<li><a href="/">Metas</a></li>
+				<li><a href="/cadastro">Cadastrar Metas</a></li>
+				<li class="active"><a href="/editar">Editar Metas</a></li>
+			</ul>
+		</div>
+
+		<!--  Conteudo Central -->
+		<div class="col-md-6">
+		
+			<div class="panel panel-primary">
+  				<div class="panel-heading">Remover Metas</div>
+  					<div class="panel-body">
+		
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							<h4>Aviso</h4>
+							Essa ação não poderá ser revertida!
+						</div>
+			
+						@form(routes.Application.remover(id)) {
+							<!--  Descrição -->
+							<div class="form-group">
+								
+								@inputText(meta("descricao"), '_label -> "Descrição", 'class -> "form-control")
+								
+							</div>
+			
+							<!--  Data -->
+							<div class="form-group">
+								@inputDate(meta("dataFinalizacao"), '_label -> "Data de Finalização", 'class -> "form-control")
+							</div>
+			
+							<!--  Prioridade -->
+							<div class="form-group">		
+								@select(meta("prioridade"), options = Seq("1" -> "MINIMO", "2" -> "BAIXO",
+								"3" -> "NORMAL","4" -> "ALTO","5" -> "URGENTE") , '_label -> "Prioridade", 'class-> "form-control")
+								
+							</div>
+			
+							<div align="right">
+								<button type="submit" class="btn btn-danger">Excluir Meta</button>
+							</div>
+			
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+}
