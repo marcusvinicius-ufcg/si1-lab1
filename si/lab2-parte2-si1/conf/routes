@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+GET		/cadastro					controllers.Application.cadastro()
+GET		/editar						controllers.Application.editar()
+POST	/cadastro/novo				controllers.Application.cadastrar()
+POST	/editar/meta				controllers.Application.abrirEdicao()
+POST	/remover/meta				controllers.Application.abrirRemover()
+POST	/editar/alterar				controllers.Application.alterar(id: Long)
+POST	/editar/remover				controllers.Application.remover(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
